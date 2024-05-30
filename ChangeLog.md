@@ -2,7 +2,11 @@
 - created change log
 - created basic dev work
 - started work on basic lootboxes
-- created basic shop
+- created basic shop function
 
 5/30/2024
-- created lootbox class 
+- created lootbox class
+    - lootTable attribute
+    - counter attribute
+    - roll method
+    - counter method 

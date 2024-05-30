@@ -19,7 +19,11 @@ Lootbox game where you open lootboxes to get cool cards
     -  enemies drop gold and have a chance to drop the items they use
 - forge to recycle items
     - gives you dust to craft higher level lootboxes
+    - craft items to increase luck
 - have unique items with different special effects and card descriptions
 - shiny items that are rarer but have more stats
 - saving game?
 - inventory
+
+# Target user(s)
+- people who like lootboxes

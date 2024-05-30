@@ -10,9 +10,9 @@
 # Imports and Global Variables ------------------------------------------------
 import Lootbox
 
-
 basicLootbox = Lootbox.Lootbox({"common": 2, "uncommon": 4,  "rare": 8, 
-                                "epic": 16, "legend": 32, "exclusive": 10000})
+                                "epic": 16, "legend": 32, 
+                                "exclusive": 1000000})
 
 
 # Functions -------------------------------------------------------------------
@@ -25,7 +25,8 @@ def shopMenu():
         if choice == "buy":
             while True:
                 try:
-                    lootboxAmount = int(input("How many lootboxes do you buy: "))
+                    lootboxAmount = int(
+                        input("How many lootboxes do you buy: "))
                 except:
                     print("please input a number")
                 else:

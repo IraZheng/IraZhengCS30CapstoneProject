@@ -24,13 +24,18 @@ class Lootbox():
             randomEntry = random.random()
             for item in self.lootTable:
                 #normalises total2
-                #chance is 1 in Lootbox[item]
+                #chance is around 1 in Lootbox[item]
                 total2 += 1/self.lootTable[item]/total
                 #returns lowest rarity
                 if randomEntry <= total2:
                     self.Counter(item)
                     break
-        print(self.counter)
+        print("\nYou have obtained:")
+        for item in self.counter:
+            if self.counter[item] > 0:
+                print(f"{self.counter[item]} {item}"+
+                      f" (1 in {self.lootTable[item]}) items")
+            self.counter[item] = 0
 
 
     def Counter(self, item):
