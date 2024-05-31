@@ -1,6 +1,7 @@
 ###############################################################################
 # Lootbox Module
 ###############################################################################
+import ItemColor
 import random
 
 
@@ -33,8 +34,13 @@ class Lootbox():
         print("\nYou have obtained:")
         for item in self.counter:
             if self.counter[item] > 0:
-                print(f"{self.counter[item]} {item}"+
-                      f" (1 in {self.lootTable[item]}) items")
+                rVal = ItemColor.colors[item][0]
+                gVal = ItemColor.colors[item][1]
+                bVal = ItemColor.colors[item][2]
+                print(f"{self.counter[item] : <10}" + 
+                      f" \033[38;2;{rVal};{gVal};{bVal}m {item : <10} \033[0m" +
+                      f" (1 in {self.lootTable[item] : <10})" + 
+                      f" {'items' : <5}")
             self.counter[item] = 0
 
 
