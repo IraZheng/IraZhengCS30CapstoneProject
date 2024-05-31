@@ -5,11 +5,17 @@ import itemColor
 
 
 class Player():
+    '''player class'''
     def __init__(self, inventory):
+        '''
+        initializes class
+        inventory: the player's inventory
+        '''
         self.inventory = inventory
 
     
     def printInv(self):
+        '''prints the player inventory'''
         print("\nYou have obtained:")
         print(f"{'amount':<10}{'item':<10}{'chance':<10}")
         for item in self.inventory:

@@ -14,3 +14,4 @@
 5/31/2024
 - added colored text
 - added aligned text
+- started work on player class
