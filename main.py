@@ -8,9 +8,9 @@
 '''Lootbox Simulator'''
 ###############################################################################
 # Imports and Global Variables ------------------------------------------------
-import Lootbox
+import lootbox
 
-basicLootbox = Lootbox.Lootbox({"common": 2, "uncommon": 4,  "rare": 8, 
+basicLootbox = lootbox.Lootbox({"common": 2, "uncommon": 4,  "rare": 8, 
                                 "epic": 16, "legend": 32, 
                                 "exclusive": 1000000})
 
