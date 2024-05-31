@@ -1,12 +1,17 @@
 ###############################################################################
-# Lootbox Module
+# lootbox module
 ###############################################################################
 import itemColor
 import random
 
 
 class Lootbox():
+    '''Lootbox class'''
     def __init__(self, lootTable):
+        '''
+        sets up the class
+        lootTable: a dict containing items and their chances
+        '''
         self.lootTable = lootTable
         counter = lootTable.copy()
         for item in counter:
@@ -15,6 +20,10 @@ class Lootbox():
 
     
     def Roll(self, amountOfRolls):
+        '''
+        generates random items based on chances
+        amountOfRolls: the number of times it will roll
+        '''
         for pull in range(amountOfRolls):
             total = 0
             for item in self.lootTable:
@@ -32,19 +41,25 @@ class Lootbox():
                     self.Counter(item)
                     break
         print("\nYou have obtained:")
+        print(f"{'amount':<10}{'item':<10}{'chance':<10}")
         for item in self.counter:
             if self.counter[item] > 0:
                 rVal = itemColor.colors[item][0]
                 gVal = itemColor.colors[item][1]
                 bVal = itemColor.colors[item][2]
-                print(f"{self.counter[item] : <10}" + 
-                      f" \033[38;2;{rVal};{gVal};{bVal}m {item : <10} \033[0m" +
-                      f" (1 in {self.lootTable[item] : <10})" + 
-                      f" {'items' : <5}")
+                chanceText = f"(1 in {self.lootTable[item]})"
+                print(f"{self.counter[item]:<10}" + 
+                      f"\033[38;2;{rVal};{gVal};{bVal}m{item:<10}\033[0m" +
+                      f"{chanceText:<15}" + 
+                      f"{'items':<5}")
             self.counter[item] = 0
-
+            
 
     def Counter(self, item):
+        '''
+        stores the number of items in each rarity
+        item: the item you are storing
+        '''
         if item in self.counter:
             self.counter[item] += 1
         else:

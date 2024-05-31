@@ -17,6 +17,7 @@ basicLootbox = lootbox.Lootbox({"common": 2, "uncommon": 4,  "rare": 8,
 
 # Functions -------------------------------------------------------------------
 def shopMenu():
+    '''Menu of the shop where you buy lootboxes'''
     while True:
         print("Welcome to the shop")
         print("What do you want to do?")

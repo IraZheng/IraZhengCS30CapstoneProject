@@ -9,4 +9,8 @@
     - lootTable attribute
     - counter attribute
     - roll method
-    - counter method 
+    - counter method
+
+5/31/2024
+- added colored text
+- added aligned text
