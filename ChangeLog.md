@@ -15,3 +15,6 @@
 - added colored text
 - added aligned text
 - started work on player class
+
+6/3/2024
+- moved text colors to main

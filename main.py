@@ -10,9 +10,13 @@
 # Imports and Global Variables ------------------------------------------------
 import lootbox
 
+colours = {"common": [207, 207, 207], "uncommon": [55, 204, 100],  
+      "rare": [36, 96, 199], "epic": [94, 11, 189], 
+      "legend": [212, 165, 23], "exclusive": [158, 11, 11]}
+
 basicLootbox = lootbox.Lootbox({"common": 2, "uncommon": 4,  "rare": 8, 
                                 "epic": 16, "legend": 32, 
-                                "exclusive": 1000000})
+                                "exclusive": 1000000}, colours)
 
 
 # Functions -------------------------------------------------------------------

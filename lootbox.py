@@ -1,18 +1,19 @@
 ###############################################################################
 # lootbox module
 ###############################################################################
-import itemColor
 import random
 
 
 class Lootbox():
     '''Lootbox class'''
-    def __init__(self, lootTable):
+    def __init__(self, lootTable, textColours):
         '''
         sets up the class
         lootTable: a dict containing items and their chances
+        textColours: a dict used to colour text
         '''
         self.lootTable = lootTable
+        self.textColours = textColours
         counter = lootTable.copy()
         for item in counter:
             counter[item] = 0
@@ -44,9 +45,9 @@ class Lootbox():
         print(f"{'amount':<10}{'item':<10}{'chance':<10}")
         for item in self.counter:
             if self.counter[item] > 0:
-                rVal = itemColor.colors[item][0]
-                gVal = itemColor.colors[item][1]
-                bVal = itemColor.colors[item][2]
+                rVal = self.textColours[item][0]
+                gVal = self.textColours[item][1]
+                bVal = self.textColours[item][2]
                 chanceText = f"(1 in {self.lootTable[item]})"
                 print(f"{self.counter[item]:<10}" + 
                       f"\033[38;2;{rVal};{gVal};{bVal}m{item:<10}\033[0m" +
