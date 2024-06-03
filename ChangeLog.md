@@ -15,6 +15,11 @@
 - added colored text
 - added aligned text
 - started work on player class
+    - printInv method
+    - inventory attribute
 
 6/3/2024
 - moved text colors to main
+    - modified classes to take textColour parameter
+- Lootbox class takes Inventory parameter
+    - stores obtained items in the player's inventory

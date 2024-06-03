@@ -15,8 +15,8 @@ class Player():
     
     def printInv(self):
         '''prints the player inventory'''
-        print("\nYou have obtained:")
-        print(f"{'amount':<10}{'item':<10}{'chance':<10}")
+        print("\nIn your inventory you have:")
+        print(f"{'amount':<10}{'item':<10}")
         for item in self.inventory:
             if self.inventory[item] > 0:
                 rVal = self.textColours[item][0]
