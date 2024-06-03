@@ -19,7 +19,15 @@
     - inventory attribute
 
 6/3/2024
-- moved text colors to main
-    - modified classes to take textColour parameter
-- Lootbox class takes Inventory parameter
-    - stores obtained items in the player's inventory
+- Player changes:
+    - added coins attribute to the player
+- Lootbox changes:
+    - Lootbox class takes Inventory parameter
+        - stores obtained items in the player's inventory
+    - BasicLootbox subclass of lootbox
+        - made this so that I can use \_\_str\_\_() method
+- Misc changes:
+    - moved text colors to main
+        - modified classes to take textColour parameter
+    - buying lootboxes now costs coins
+    - improved shop menu

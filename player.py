@@ -3,12 +3,14 @@
 ###############################################################################
 class Player():
     '''player class'''
-    def __init__(self, inventory, textColours):
+    def __init__(self, coins, inventory, textColours):
         '''
         initializes class
+        coins: the amount of couns the player has
         inventory: the player's inventory
         textColours: a dict used to colour text
         '''
+        self.coins = coins
         self.inventory = inventory
         self.textColours = textColours
 
@@ -16,6 +18,7 @@ class Player():
     def printInv(self):
         '''prints the player inventory'''
         print("\nIn your inventory you have:")
+        print(f"{self.coins} coins")
         print(f"{'amount':<10}{'item':<10}")
         for item in self.inventory:
             if self.inventory[item] > 0:

@@ -16,14 +16,13 @@ colours = {"common": [207, 207, 207], "uncommon": [55, 204, 100],
       "rare": [36, 96, 199], "epic": [94, 11, 189], 
       "legend": [212, 165, 23], "exclusive": [158, 11, 11]}
 #player setup
-Player1 = player.Player({"common": 0, "uncommon": 0,  "rare": 0, 
-                           "epic": 0, "legend": 0, 
-                           "exclusive": 0}, colours)
+Player1 = player.Player(10, {"common": 0, "uncommon": 0,  "rare": 0, 
+                             "epic": 0, "legend": 0, "exclusive": 0}, 
+                        colours)
 #lootbox setup
-basicLootbox = lootbox.Lootbox({"common": 2, "uncommon": 4,  "rare": 8, 
-                                "epic": 16, "legend": 32, 
-                                "exclusive": 1000000}, 
-                               Player1.inventory, colours)
+basicLootbox = lootbox.BasicLootbox(Player1.inventory, colours)
+#list of lootboxes available in the shop
+shopBoxes = [basicLootbox]
 
 
 # Functions -------------------------------------------------------------------
@@ -33,20 +32,37 @@ def shopMenu():
         print("\nWelcome to the shop")
         print("What do you want to do?")
         print("-inventory\n-buy\n-exit")
-        choice = input("-").lower()
-        if choice == "inventory":
+        shopChoice = input("-").lower()
+        if shopChoice == "inventory":
             Player1.printInv()
-        elif choice == "buy":
+        elif shopChoice == "buy":
             while True:
-                try:
-                    lootboxAmount = int(
-                        input("How many lootboxes do you buy: "))
-                except:
-                    print("please input a number")
-                else:
-                    basicLootbox.Roll(lootboxAmount)
+                print(f"\nYou have {Player1.coins} coins")
+                print(f"{'Cost': <10}{'Item': <20}")
+                for box in shopBoxes:
+                    print(f"{box.cost: <10}{str(box): <20}")
+                print("-back")
+                buyChoice = input("-").lower()
+                for box in shopBoxes:
+                    if buyChoice == str(box).lower():
+                        while True:
+                            try:
+                                lootboxAmount = int(
+                                    input("How many do you buy: "))
+                            except:
+                                print("please input a number")
+                            else:
+                                if Player1.coins - lootboxAmount >= 0:
+                                    box.Roll(lootboxAmount)
+                                    Player1.coins -= lootboxAmount
+                                else:
+                                    print("You do not have enough coins")
+                                break
+                if buyChoice == "back":
                     break
-        elif choice == "exit":
+                else:
+                    print("Please choose one of the options listed above")
+        elif shopChoice == "exit":
             break
         else:
             print("Please choose one of the options listed above")
