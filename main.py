@@ -8,6 +8,7 @@
 '''Lootbox Simulator'''
 ###############################################################################
 # Imports and Global Variables ------------------------------------------------
+from re import X
 import lootbox
 import player
 
@@ -30,7 +31,7 @@ def shopMenu():
     '''Menu of the shop where you buy lootboxes'''
     while True:
         print("\nWelcome to the shop")
-        print("-inventory\n-buy\n-exit")
+        print("-inventory\n-buy\n-quest\n-exit")
         shopChoice = input("What do you want to do: ").lower()
         if shopChoice == "inventory":
             Player1.printInv()
@@ -41,7 +42,7 @@ def shopMenu():
                 for box in shopBoxes:
                     print(f"{box.cost: <10}{str(box): <20}")
                 print("-back")
-                buyChoice = input("-").lower()
+                buyChoice = input("What item do you buy: ").lower()
                 for box in shopBoxes:
                     if buyChoice == str(box).lower():
                         while True:
@@ -60,11 +61,19 @@ def shopMenu():
                 if buyChoice == "back":
                     break
                 else:
-                    print("Please choose one of the items listed above")
+                    print("Please choose one of the 'Item's listed above")
+        elif shopChoice == "quest":
+            quest()
         elif shopChoice == "exit":
             break
         else:
             print("Please choose one of the options listed above")
+
+
+def quest():
+    Player1.coins += 1
+    print("\nYou have gained a coin for completing the quest")
+    print(f"You have {Player1.coins} coins")
 
 
 # Main ------------------------------------------------------------------------

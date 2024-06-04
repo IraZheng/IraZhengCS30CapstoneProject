@@ -34,4 +34,5 @@
 
   6/4/2024
   - Lootbox cost now works
-  - 
+  - Started work on quests
+      - just gives you gold for now
