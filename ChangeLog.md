@@ -31,3 +31,7 @@
         - modified classes to take textColour parameter
     - buying lootboxes now costs coins
     - improved shop menu
+
+  6/4/2024
+  - Lootbox cost now works
+  - 

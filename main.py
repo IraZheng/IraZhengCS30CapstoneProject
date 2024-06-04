@@ -30,9 +30,8 @@ def shopMenu():
     '''Menu of the shop where you buy lootboxes'''
     while True:
         print("\nWelcome to the shop")
-        print("What do you want to do?")
         print("-inventory\n-buy\n-exit")
-        shopChoice = input("-").lower()
+        shopChoice = input("What do you want to do: ").lower()
         if shopChoice == "inventory":
             Player1.printInv()
         elif shopChoice == "buy":
@@ -52,16 +51,16 @@ def shopMenu():
                             except:
                                 print("please input a number")
                             else:
-                                if Player1.coins - lootboxAmount >= 0:
+                                if Player1.coins - lootboxAmount*box.cost >= 0:
                                     box.Roll(lootboxAmount)
-                                    Player1.coins -= lootboxAmount
+                                    Player1.coins -= lootboxAmount*box.cost
                                 else:
-                                    print("You do not have enough coins")
+                                    print("\nYou do not have enough coins")
                                 break
                 if buyChoice == "back":
                     break
                 else:
-                    print("Please choose one of the options listed above")
+                    print("Please choose one of the items listed above")
         elif shopChoice == "exit":
             break
         else:
