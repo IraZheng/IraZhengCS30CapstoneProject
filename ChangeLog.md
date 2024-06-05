@@ -32,7 +32,14 @@
     - buying lootboxes now costs coins
     - improved shop menu
 
-  6/4/2024
-  - Lootbox cost now works
-  - Started work on quests
-      - just gives you gold for now
+6/4/2024
+- Lootbox cost now works
+- Started work on quests
+    - just gives you gold for now
+
+6/5/2024
+- Made a main menu
+    - Made a movement menu
+- Made a guild menu where you go to accept quests
+- Added acceptedQuests attribute to player
+- more work on quests
