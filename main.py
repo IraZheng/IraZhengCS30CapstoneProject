@@ -82,7 +82,7 @@ def guildMenu():
     '''the place where you do accept quests and gain coins'''
     while True:
         print("\nWelcome to the adventurer's guild")
-        print("-accept quests\n-view quests\n-turn in quests\n-exit")
+        print("-accept quests\n-view accepted quests\n-turn in quests\n-exit")
         guildChoice = input("What do you do: ").lower()
         if guildChoice == "accept quests":
             while True:
@@ -122,7 +122,7 @@ def guildMenu():
                     print("Please choose one of the options listed above")
                 else:
                     break
-        elif guildChoice == "view quests":
+        elif guildChoice == "view accepted quests":
             print("\nHere are all of your accepted quests:")
             for quest in Player1.acceptedQuests:
                 quest.printDescription()
