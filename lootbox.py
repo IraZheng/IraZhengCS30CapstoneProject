@@ -6,14 +6,16 @@ import random
 
 class Lootbox():
     '''Lootbox class'''
-    def __init__(self, cost, lootTable, inventory, textColours):
+    def __init__(self, name, cost, lootTable, inventory, textColours):
         '''
         sets up the class
+        name: the name of the lootbox
         cost: the amount of money the lootbox costs in the store
         lootTable: a dict containing items and their chances
         inventory: where items are deposited to
         textColours: a dict used to colour text
         '''
+        self.name = name
         self.cost = cost
         self.lootTable = lootTable
         self.inventory = inventory
@@ -78,25 +80,3 @@ class Lootbox():
         else:
             self.inventory[item] = 1
         
-
-class BasicLootbox(Lootbox):
-    '''Lootbox subclass'''
-    def __init__(self, inventory, textColours):
-        '''
-        sets up the class
-        inventory: where items are deposited to
-        textColours: a dict used to colour text
-        '''
-        self.cost = 1
-        self.lootTable = {"common": 2, "uncommon": 4,  "rare": 8, 
-                          "epic": 16, "legend": 32, "exclusive": 1000000}
-        self.inventory = inventory
-        self.textColours = textColours
-        counter = self.lootTable.copy()
-        for item in counter:
-            counter[item] = 0
-        self.counter = counter
-
-
-    def __str__(self):
-        return "Basic Lootbox"

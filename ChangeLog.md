@@ -43,3 +43,12 @@
 - Made a guild menu where you go to accept quests
 - Added acceptedQuests attribute to player
 - more work on quests
+
+6/5/2024
+- Removed BasicLootbox subclass
+- Added name attribute to Lootbox class
+- -Added Quests class
+    - name attribute
+    - description attribute
+    - completionStatus attribute
+    - reward attribute

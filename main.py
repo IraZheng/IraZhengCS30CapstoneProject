@@ -10,6 +10,7 @@
 # Imports and Global Variables ------------------------------------------------
 import lootbox
 import player
+import quests
 
 #for text colors
 colours = {"common": [207, 207, 207], "uncommon": [55, 204, 100],  
@@ -18,13 +19,21 @@ colours = {"common": [207, 207, 207], "uncommon": [55, 204, 100],
 #player setup
 Player1 = player.Player(10, {"common": 0, "uncommon": 0,  "rare": 0, 
                              "epic": 0, "legend": 0, "exclusive": 0}, 
-                        colours, {})
+                        colours, [])
 #lootbox setup
-basicLootbox = lootbox.BasicLootbox(Player1.inventory, colours)
+basicLootbox = lootbox.Lootbox("Basic Lootbox", 1, 
+                               {"common": 2, "uncommon": 4,  "rare": 8, 
+                                "epic": 16, "legend": 32, 
+                                "exclusive": 1000000}, 
+                               Player1.inventory, colours)
 #list of lootboxes available in the shop
 shopBoxes = [basicLootbox]
-#list of all quests in the guild
-quests = ["quest1", "quest2", "quest3"]
+#setup quests
+WoodI = quests.Quest("WoodI", "Collect 10 pieces of wood", False, 10)
+WoodII = quests.Quest("WoodII", "Collect 100 pieces of wood", False, 100)
+WoodIII = quests.Quest("WoodIII", "Collect 1000 pieces of wood", False, 1000)
+#dict of quests and if they can be taken in the guild
+questDict = {WoodI: True, WoodII: True, WoodIII: True}
 
 # Functions -------------------------------------------------------------------
 def shopMenu():
@@ -40,11 +49,11 @@ def shopMenu():
                 print(f"\nYou have {Player1.coins} coins")
                 print(f"{'Cost': <10}{'Item': <20}")
                 for box in shopBoxes:
-                    print(f"{box.cost: <10}{str(box): <20}")
+                    print(f"{box.cost: <10}{box.name: <20}")
                 print("-back")
                 buyChoice = input("What item do you buy: ").lower()
                 for box in shopBoxes:
-                    if buyChoice == str(box).lower():
+                    if buyChoice == box.name.lower():
                         while True:
                             try:
                                 lootboxAmount = int(
@@ -77,36 +86,39 @@ def guildMenu():
         if guildChoice == "accept quests":
             while True:
                 print("\nHere are all the available quests")
-                for quest in quests:
-                    print(f"-{quest}")
+                for quest in questDict:
+                    print(f"-{quest.name}")
                 print("-back")
                 questAcceptionChoice = input(
-                    "Which quest do you take: ").lower()
-                if questAcceptionChoice in quests:
-                    print(f"\nYou have accapted {questAcceptionChoice}")
-                    Player1.acceptedQuests[questAcceptionChoice] = False
+                    "Which quest do you want to take: ").lower()
+                _invalidChoice = True
+                if questAcceptionChoice == "back":
+                    _invalidChoice = False
                     break
-                elif questAcceptionChoice == "back":
-                    break
-                else:
+                for quest in questDict:
+                    if questAcceptionChoice == quest.name.lower():
+                        print(f"\nYou have accepted {quest.name}")
+                        Player1.acceptedQuests.append(quest)
+                        questDict[quest] = False
+                        _invalidChoice = False
+                        break
+                if _invalidChoice:
                     print("Please choose one of the options listed above")
+                else:
+                    break
         elif guildChoice == "view quests":
             print("\nHere are all of your accepted quests:")
             print(f"{'quest':<10}{'status':<10}")
             for quest in Player1.acceptedQuests:
-                if Player1.acceptedQuests[quest]:
-                    questStatus = (
-                        f"\033[38;2;{54};{237};{21}m{'completed'}\033[0m")
-                else:
-                    questStatus = (
-                        f"\033[38;2;{224};{13};{13}m{'incomplete'}\033[0m")
-                print(f"{quest:<10}{questStatus:<10}")
+                quest.printDescription()
         elif guildChoice == "turn in quests":
-            for quest in Player1.acceptedQuests:
-                if Player1.acceptedQuests[quest]:
-                    Player1.coins += 10
-                    print(
-                        "\nYou have gained 10 coins for completing the quest")
+            for quest in range(len(Player1.acceptedQuests)):
+                if Player1.acceptedQuests[quest].completionStatus:
+                    Player1.coins += Player1.acceptedQuests[quest].reward
+                    print("\nYou have gained " + 
+                          f"{Player1.acceptedQuests[quest].reward}" + 
+                          " coins for completing" + 
+                          f" {Player1.acceptedQuests[quest].name}")
                     print(f"You have {Player1.coins} coins")
         elif guildChoice == "exit":
             break

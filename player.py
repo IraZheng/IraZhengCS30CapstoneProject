@@ -9,7 +9,7 @@ class Player():
         coins: the amount of couns the player has
         inventory: the player's inventory
         textColours: a dict used to colour text
-        acceptedQuests a dict of accepted quests and their completion status
+        acceptedQuests a list of accepted quests
         '''
         self.coins = coins
         self.inventory = inventory
