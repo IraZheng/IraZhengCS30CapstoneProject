@@ -29,9 +29,10 @@ basicLootbox = lootbox.Lootbox("Basic Lootbox", 1,
 #list of lootboxes available in the shop
 shopBoxes = [basicLootbox]
 #setup quests
-WoodI = quests.Quest("WoodI", "Collect 10 pieces of wood", False, 10)
-WoodII = quests.Quest("WoodII", "Collect 100 pieces of wood", False, 100)
-WoodIII = quests.Quest("WoodIII", "Collect 1000 pieces of wood", False, 1000)
+WoodI = quests.Quest("WoodI", "Collect 10 pieces of wood", False, 10, 10)
+WoodII = quests.Quest("WoodII", "Collect 100 pieces of wood", False, 100, 100)
+WoodIII = quests.Quest("WoodIII", "Collect 1000 pieces of wood", 
+                       False, 1000, 1000)
 #dict of quests and if they can be taken in the guild
 questDict = {WoodI: True, WoodII: True, WoodIII: True}
 
@@ -87,7 +88,8 @@ def guildMenu():
             while True:
                 print("\nHere are all the available quests")
                 for quest in questDict:
-                    print(f"-{quest.name}")
+                    if questDict[quest]:
+                        print(f"-{quest.name}")
                 print("-back")
                 questAcceptionChoice = input(
                     "Which quest do you want to take: ").lower()
@@ -96,10 +98,24 @@ def guildMenu():
                     _invalidChoice = False
                     break
                 for quest in questDict:
-                    if questAcceptionChoice == quest.name.lower():
-                        print(f"\nYou have accepted {quest.name}")
-                        Player1.acceptedQuests.append(quest)
-                        questDict[quest] = False
+                    if (questAcceptionChoice == quest.name.lower() and 
+                        questDict[quest]):
+                        while True:
+                            print("")
+                            quest.printDescription()
+                            print("\n-Accept\n-Back")
+                            acceptionConfirmation = (
+                                input("What do you do: ").lower())
+                            if acceptionConfirmation == "accept":
+                                print(f"\nYou have accepted {quest.name}")
+                                Player1.acceptedQuests.append(quest)
+                                questDict[quest] = False
+                                break
+                            elif acceptionConfirmation == "back":
+                                break
+                            else:
+                                print("Please choose one of the " + 
+                                      "options listed above")
                         _invalidChoice = False
                         break
                 if _invalidChoice:
@@ -108,7 +124,6 @@ def guildMenu():
                     break
         elif guildChoice == "view quests":
             print("\nHere are all of your accepted quests:")
-            print(f"{'quest':<10}{'status':<10}")
             for quest in Player1.acceptedQuests:
                 quest.printDescription()
         elif guildChoice == "turn in quests":

@@ -3,17 +3,20 @@
 ###############################################################################
 class Quest():
     "quest class"
-    def __init__(self, name, description, completionStatus, reward):
+    def __init__(self, name, description, completionStatus, 
+                 requirement, reward):
         '''
         sets up the quest class
         name: the name of the quest
         description: the description of the class
         completionStatus: a bool of whether or not the quest is complete
+        requirement: the number of required resources
         reward: the number of coins you get after you complete the quest
         '''
         self.name = name
         self.description = description
         self.completionStatus = completionStatus
+        self.requirement = requirement
         self.reward = reward
 
     def printDescription(self):
