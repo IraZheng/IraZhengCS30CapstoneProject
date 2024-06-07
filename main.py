@@ -11,13 +11,15 @@
 import lootbox
 import player
 import quests
+import random
+
 
 #for text colors
-colours = {"common": [207, 207, 207], "uncommon": [55, 204, 100],  
+colours = {"wood": [120, 80, 7],"common": [207, 207, 207], "uncommon": [55, 204, 100],  
       "rare": [36, 96, 199], "epic": [94, 11, 189], 
       "legend": [212, 165, 23], "exclusive": [158, 11, 11]}
 #player setup
-Player1 = player.Player(10, {"common": 0, "uncommon": 0,  "rare": 0, 
+Player1 = player.Player(10, {"wood": 0, "common": 0, "uncommon": 0,  "rare": 0, 
                              "epic": 0, "legend": 0, "exclusive": 0}, 
                         colours, [], 1)
 #lootbox setup
@@ -29,10 +31,12 @@ basicLootbox = lootbox.Lootbox("Basic Lootbox", 1,
 #list of lootboxes available in the shop
 shopBoxes = [basicLootbox]
 #setup quests
-WoodI = quests.Quest("WoodI", "Collect 10 pieces of wood", False, 10, 10)
-WoodII = quests.Quest("WoodII", "Collect 100 pieces of wood", False, 100, 100)
+WoodI = quests.Quest("WoodI", "Collect 10 pieces of wood", 
+                     False, 10, 10, "wood")
+WoodII = quests.Quest("WoodII", "Collect 100 pieces of wood", 
+                      False, 100, 100, "wood")
 WoodIII = quests.Quest("WoodIII", "Collect 1000 pieces of wood", 
-                       False, 1000, 1000)
+                       False, 1000, 1000, "wood")
 #dict of quests and if they can be taken in the guild
 questDict = {WoodI: True, WoodII: True, WoodIII: True}
 
@@ -82,9 +86,12 @@ def guildMenu():
     '''the place where you do accept quests and gain coins'''
     while True:
         print("\nWelcome to the adventurer's guild")
-        print("-accept quests\n-view accepted quests\n-turn in quests\n-exit")
+        print("-inventory\n-accept quests\n" + 
+              "-view accepted quests\n-turn in quests\n-exit")
         guildChoice = input("What do you do: ").lower()
-        if guildChoice == "accept quests":
+        if guildChoice == "inventory":
+            Player1.printInv()
+        elif guildChoice == "accept quests":
             while True:
                 print("\nHere are all the available quests")
                 for quest in questDict:
@@ -97,19 +104,33 @@ def guildMenu():
                 if questAcceptionChoice == "back":
                     _invalidChoice = False
                     break
-                for quest in questDict:
-                    if (questAcceptionChoice == quest.name.lower() and 
-                        questDict[quest]):
+                #ques and not quest b/c it will be one character too long lol
+                for ques in questDict:
+                    if (questAcceptionChoice == ques.name.lower() and 
+                        questDict[ques]):
                         while True:
                             print("")
-                            quest.printDescription()
-                            print("\n-Accept\n-Back")
+                            ques.printDescription()
+                            print("\n-accept\n-back")
                             acceptionConfirmation = (
                                 input("What do you do: ").lower())
                             if acceptionConfirmation == "accept":
-                                print(f"\nYou have accepted {quest.name}")
-                                Player1.acceptedQuests.append(quest)
-                                questDict[quest] = False
+                                if len(Player1.acceptedQuests) >= 1:
+                                    for accpetedQ in Player1.acceptedQuests:
+                                        if accpetedQ.type == ques.type:
+                                            print("\nYou cannot have 2 of " + 
+                                                 "the same type of quest")
+                                            break
+                                        else:
+                                            print("\nYou have accepted " + 
+                                                  f"{ques.name}")
+                                            Player1.acceptedQuests.append(ques)
+                                            questDict[ques] = False
+                                            break
+                                else:
+                                    print(f"\nYou have accepted {ques.name}")
+                                    Player1.acceptedQuests.append(ques)
+                                    questDict[ques] = False
                                 break
                             elif acceptionConfirmation == "back":
                                 break
@@ -129,13 +150,48 @@ def guildMenu():
         elif guildChoice == "turn in quests":
             for quest in range(len(Player1.acceptedQuests)):
                 if Player1.acceptedQuests[quest].completionStatus:
+                    #rewards
                     Player1.coins += Player1.acceptedQuests[quest].reward
                     print("\nYou have gained " + 
                           f"{Player1.acceptedQuests[quest].reward}" + 
                           " coins for completing" + 
                           f" {Player1.acceptedQuests[quest].name}")
                     print(f"You have {Player1.coins} coins")
+            for quest in Player1.acceptedQuests:
+                if quest.completionStatus:
+                    Player1.inventory[quest.type] -= quest.requirement
+                    #makes the quest incomplete
+                    quest.completionStatus = False
+                    #allows quest to be taken again
+                    questDict[quest] = True
+                    #removes accepted quests
+                    Player1.acceptedQuests.pop()
         elif guildChoice == "exit":
+            break
+        else:
+            print("Please choose one of the options listed above")
+
+
+def forestMenu():
+    '''This is where you gain wood'''
+    while True:
+        print("\nWelcome to the forest")
+        print("-inventory\n-chop wood\n-exit")
+        forestChoice = input("What do you do: ").lower()
+        if forestChoice == "inventory":
+            Player1.printInv()
+        elif forestChoice == "chop wood":
+            woodAmount = random.randint(1,5)
+            Player1.inventory["wood"]+=woodAmount
+            print(f"\nYou have gained {woodAmount} wood")
+            for quest in Player1.acceptedQuests:
+                if (quest.type == "wood" and 
+                    Player1.inventory["wood"] >= quest.requirement):
+                    quest.completionStatus = True
+                    print("You have "+ 
+                          f"\033[38;2;{54};{237};{21}m{'completed'}\033[0m" + 
+                         f" {quest.name}")
+        elif forestChoice == "exit":
             break
         else:
             print("Please choose one of the options listed above")
@@ -145,13 +201,16 @@ def movementMenu():
     '''This menu moves the player to a different location'''
     while True:
         print("\nWhere do you want to go?")
-        print("-shop\n-guild\n-back")
+        print("-shop\n-guild\n-forest\n-back")
         movementChoice = input("Where do you want to go: ").lower()
         if movementChoice == "shop":
             shopMenu()
             break
         elif movementChoice == "guild":
             guildMenu()
+            break
+        elif movementChoice == "forest":
+            forestMenu()
             break
         elif movementChoice == "back":
             break

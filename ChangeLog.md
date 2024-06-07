@@ -54,3 +54,9 @@
     - reward attribute
 - Added luck attribute to player
 - rolling lootboxes now accounts for luck
+
+6/7/2024
+- allows completed quests to be taken again
+- removes completed quests from player's list
+- Added forest area to collect wood for quests
+- Added type attribute to quest
