@@ -19,7 +19,7 @@ colours = {"common": [207, 207, 207], "uncommon": [55, 204, 100],
 #player setup
 Player1 = player.Player(10, {"common": 0, "uncommon": 0,  "rare": 0, 
                              "epic": 0, "legend": 0, "exclusive": 0}, 
-                        colours, [])
+                        colours, [], 1)
 #lootbox setup
 basicLootbox = lootbox.Lootbox("Basic Lootbox", 1, 
                                {"common": 2, "uncommon": 4,  "rare": 8, 
@@ -63,7 +63,7 @@ def shopMenu():
                                 print("please input a number")
                             else:
                                 if Player1.coins - lootboxAmount*box.cost >= 0:
-                                    box.Roll(lootboxAmount)
+                                    box.Roll(lootboxAmount, Player1.luck)
                                     Player1.coins -= lootboxAmount*box.cost
                                 else:
                                     print("\nYou do not have enough coins")

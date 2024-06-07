@@ -26,23 +26,27 @@ class Lootbox():
         self.counter = counter
 
     
-    def Roll(self, amountOfRolls):
+    def Roll(self, amountOfRolls, luck):
         '''
         generates random items based on chances
         amountOfRolls: the number of times it will roll
         '''
         for pull in range(amountOfRolls):
             total = 0
+            adjustedTotals = []
             for item in self.lootTable:
-                #adds up all of the chances so that they can later be used to 
-                #cancel/normalise total2
-                total += 1/self.lootTable[item]
+                #luck root power to make rare items more likely
+                #the most extreme it can go to is even chances for everything
+                adjustedChance = self.lootTable[item] ** (1/luck)
+                total += 1/adjustedChance
+                adjustedTotals.append(1/adjustedChance)
             total2 = 0
-            randomEntry = random.random()
-            for item in self.lootTable:
-                #normalises total2
-                #chance is around 1 in Lootbox[item]
-                total2 += 1/self.lootTable[item]/total
+            randomEntry = random.random()*total
+            #I have to store the adjusted chances in a list b/c I multiplied 
+            #random by total
+            #enumerate makes the list a dict with keys being its index
+            for counter, item in enumerate(self.lootTable):
+                total2 += adjustedTotals[counter]
                 #returns lowest rarity
                 if randomEntry <= total2:
                     self.Counter(item)

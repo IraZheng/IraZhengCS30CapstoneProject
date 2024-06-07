@@ -47,8 +47,10 @@
 6/5/2024
 - Removed BasicLootbox subclass
 - Added name attribute to Lootbox class
-- -Added Quests class
+- Added Quests class
     - name attribute
     - description attribute
     - completionStatus attribute
     - reward attribute
+- Added luck attribute to player
+- rolling lootboxes now accounts for luck

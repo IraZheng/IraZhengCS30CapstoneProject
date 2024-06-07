@@ -3,18 +3,20 @@
 ###############################################################################
 class Player():
     '''player class'''
-    def __init__(self, coins, inventory, textColours, acceptedQuests):
+    def __init__(self, coins, inventory, textColours, acceptedQuests, luck):
         '''
         initializes class
         coins: the amount of couns the player has
         inventory: the player's inventory
         textColours: a dict used to colour text
         acceptedQuests a list of accepted quests
+        luck: the luck of the player
         '''
         self.coins = coins
         self.inventory = inventory
         self.textColours = textColours
         self.acceptedQuests = acceptedQuests
+        self.luck = luck
 
     
     def printInv(self):
