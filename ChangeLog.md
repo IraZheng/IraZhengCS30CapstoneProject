@@ -60,3 +60,6 @@
 - removes completed quests from player's list
 - Added forest area to collect wood for quests
 - Added type attribute to quest
+
+6/10/2024
+- Added abandoning quests

@@ -100,9 +100,9 @@ def guildMenu():
                 print("-back")
                 questAcceptionChoice = input(
                     "Which quest do you want to take: ").lower()
-                _invalidChoice = True
+                invalidChoice = True
                 if questAcceptionChoice == "back":
-                    _invalidChoice = False
+                    invalidChoice = False
                     break
                 #ques and not quest b/c it will be one character too long lol
                 for ques in questDict:
@@ -111,7 +111,7 @@ def guildMenu():
                         while True:
                             print("")
                             ques.printDescription()
-                            print("\n-accept\n-back")
+                            print("-accept\n-back")
                             acceptionConfirmation = (
                                 input("What do you do: ").lower())
                             if acceptionConfirmation == "accept":
@@ -137,16 +137,14 @@ def guildMenu():
                             else:
                                 print("Please choose one of the " + 
                                       "options listed above")
-                        _invalidChoice = False
+                        invalidChoice = False
                         break
-                if _invalidChoice:
+                if invalidChoice:
                     print("Please choose one of the options listed above")
                 else:
                     break
         elif guildChoice == "view accepted quests":
-            print("\nHere are all of your accepted quests:")
-            for quest in Player1.acceptedQuests:
-                quest.printDescription()
+            Player1.viewQuests(questDict)
         elif guildChoice == "turn in quests":
             for quest in range(len(Player1.acceptedQuests)):
                 if Player1.acceptedQuests[quest].completionStatus:
