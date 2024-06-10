@@ -15,21 +15,28 @@ import random
 
 
 #for text colors
-colours = {"wood": [120, 80, 7],"common": [207, 207, 207], "uncommon": [55, 204, 100],  
-      "rare": [36, 96, 199], "epic": [94, 11, 189], 
-      "legend": [212, 165, 23], "exclusive": [158, 11, 11]}
+colours = {"wood": [120, 80, 7],"common": [207, 207, 207], 
+           "uncommon": [55, 204, 100], "rare": [36, 96, 199], 
+           "epic": [94, 11, 189], "legend": [212, 165, 23], 
+           "mythic": [240, 67, 10],"exclusive": [46, 53, 71]}
 #player setup
-Player1 = player.Player(10, {"wood": 0, "common": 0, "uncommon": 0,  "rare": 0, 
+Player1 = player.Player(1000000, {"wood": 0, "common": 0, "uncommon": 0,  "rare": 0, 
                              "epic": 0, "legend": 0, "exclusive": 0}, 
                         colours, [], 1)
 #lootbox setup
 basicLootbox = lootbox.Lootbox("Basic Lootbox", 1, 
-                               {"common": 2, "uncommon": 4,  "rare": 8, 
+                               {"common": 2, "uncommon": 4, "rare": 8, 
                                 "epic": 16, "legend": 32, 
                                 "exclusive": 1000000}, 
                                Player1.inventory, colours)
+advancedLootbox = lootbox.Lootbox("advanced Lootbox", 5, 
+                                  {"uncommon": 2, "rare": 4, "epic": 8, 
+                                   "legend": 16, "mythic": 32, 
+                                   "exclusive": 1000000}, 
+                                  Player1.inventory, colours)
+
 #list of lootboxes available in the shop
-shopBoxes = [basicLootbox]
+shopBoxes = [basicLootbox, advancedLootbox]
 #setup quests
 WoodI = quests.Quest("WoodI", "Collect 10 pieces of wood", 
                      False, 10, 10, "wood")
@@ -57,8 +64,13 @@ def shopMenu():
                     print(f"{box.cost: <10}{box.name: <20}")
                 print("-back")
                 buyChoice = input("What item do you buy: ").lower()
+                invalidChoice = True
+                if buyChoice == "back":
+                    invalidChoice = False
+                    break
                 for box in shopBoxes:
                     if buyChoice == box.name.lower():
+                        invalidChoice = False
                         while True:
                             try:
                                 lootboxAmount = int(
@@ -72,10 +84,10 @@ def shopMenu():
                                 else:
                                     print("\nYou do not have enough coins")
                                 break
-                if buyChoice == "back":
-                    break
-                else:
+                if invalidChoice:
                     print("Please choose one of the 'Item's listed above")
+                else:
+                    break
         elif shopChoice == "exit":
             break
         else:

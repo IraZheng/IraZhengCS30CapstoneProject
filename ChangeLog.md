@@ -64,3 +64,4 @@
 6/10/2024
 - Added abandoning quests
 - Fixed quests not being complete when you accept them after getting the items
+- Added a new lootbox
