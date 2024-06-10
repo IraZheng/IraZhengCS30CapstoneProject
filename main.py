@@ -20,8 +20,9 @@ colours = {"wood": [120, 80, 7],"common": [207, 207, 207],
            "epic": [94, 11, 189], "legend": [212, 165, 23], 
            "mythic": [240, 67, 10],"exclusive": [46, 53, 71]}
 #player setup
-Player1 = player.Player(1000000, {"wood": 0, "common": 0, "uncommon": 0,  "rare": 0, 
-                             "epic": 0, "legend": 0, "exclusive": 0}, 
+Player1 = player.Player(1000000, {"wood": 0, "common": 0, "uncommon": 0, 
+                                  "rare": 0, "epic": 0, "legend": 0, 
+                                  "mythic": 0, "exclusive": 0}, 
                         colours, [], 1)
 #lootbox setup
 basicLootbox = lootbox.Lootbox("Basic Lootbox", 1, 
