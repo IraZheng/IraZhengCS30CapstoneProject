@@ -106,6 +106,10 @@ def guildMenu():
                     break
                 #ques and not quest b/c it will be one character too long lol
                 for ques in questDict:
+                    if (Player1.inventory[ques.type] >= ques.requirement):
+                        ques.completionStatus = True
+                    elif (Player1.inventory[ques.type] < ques.requirement):
+                        ques.completionStatus = False
                     if (questAcceptionChoice == ques.name.lower() and 
                         questDict[ques]):
                         while True:
@@ -146,18 +150,19 @@ def guildMenu():
         elif guildChoice == "view accepted quests":
             Player1.viewQuests(questDict)
         elif guildChoice == "turn in quests":
-            for quest in range(len(Player1.acceptedQuests)):
-                if Player1.acceptedQuests[quest].completionStatus:
-                    #rewards
-                    Player1.coins += Player1.acceptedQuests[quest].reward
-                    print("\nYou have gained " + 
-                          f"{Player1.acceptedQuests[quest].reward}" + 
-                          " coins for completing" + 
-                          f" {Player1.acceptedQuests[quest].name}")
-                    print(f"You have {Player1.coins} coins")
             for quest in Player1.acceptedQuests:
                 if quest.completionStatus:
+                    #remove items from inventory
                     Player1.inventory[quest.type] -= quest.requirement
+                    print(f"\nYou have turned in {quest.requirement} " + 
+                          f"{quest.type}")
+                    print(f"You have {Player1.inventory[quest.type]} " + 
+                          f"{quest.type} left")
+                    #rewards
+                    Player1.coins += quest.reward
+                    print("You have gained " + 
+                          f"{quest.reward} coins for completing {quest.name}")
+                    print(f"You have {Player1.coins} coins")
                     #makes the quest incomplete
                     quest.completionStatus = False
                     #allows quest to be taken again
