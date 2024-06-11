@@ -65,3 +65,7 @@
 - Added abandoning quests
 - Fixed quests not being complete when you accept them after getting the items
 - Added a new lootbox
+
+6/11/2024
+- bug fixes
+- I dont think I have time to make items from lootbox actually do something
