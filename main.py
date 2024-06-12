@@ -184,6 +184,9 @@ def guildMenu():
                     questDict[quest] = True
                     #removes accepted quests
                     Player1.acceptedQuests.pop()
+                else:
+                    print(f"\n{quest.name} is " + 
+                          f"\033[38;2;{224};{13};{13}m{'incomplete'}\033[0m")
         elif guildChoice == "exit":
             break
         else:
