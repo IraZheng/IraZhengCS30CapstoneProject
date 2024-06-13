@@ -26,10 +26,9 @@ itemStrength = {"none": [1, 5],"common": [2, 6], "uncommon": [4, 8],
             "mythic": [25, 50],"exclusiveB": [50, 100], 
             "exclusiveA": [100, 200]}
 #player setup
-Player1 = player.Player(10, {"wood": 0, "common": 0, "uncommon": 0, 
-                             "rare": 0, "epic": 0, "legend": 0, 
-                             "mythic": 0, "exclusiveB": 0, 
-                             "exclusiveA": 0}, 
+Player1 = player.Player(1, {"wood": 0, "common": 0, "uncommon": 0, "rare": 0, 
+                            "epic": 0, "legend": 0, "mythic": 0, 
+                            "exclusiveB": 0, "exclusiveA": 0}, 
                         colours, [], 1)
 #lootbox setup
 basicLootbox = lootbox.Lootbox("Basic Lootbox", 1, 
