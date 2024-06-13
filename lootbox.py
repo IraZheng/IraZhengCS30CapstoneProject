@@ -32,6 +32,8 @@ class Lootbox():
         amountOfRolls: the number of times it will roll
         '''
         for pull in range(amountOfRolls):
+            #I got this logic from https://www.youtube.com/watch?v=BdHo3yzrI8E
+            #I was going to add luck but I dont think I will have time
             total = 0
             adjustedTotals = []
             for item in self.lootTable:
