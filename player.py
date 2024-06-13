@@ -20,10 +20,10 @@ class Player():
         self.equipped = "none"
 
     
-    def printInv(self, axePower):
+    def printInv(self, itemStrength):
         '''
         prints the player inventory
-        axePower: the strength of the item
+        itemStrength: the strength of the item
         '''
         while True:
             print("\nIn your inventory you have:")
@@ -48,7 +48,8 @@ class Player():
             else:
                 print(f"You currently have {self.equipped} equipped")
             print("it has a stength of " + 
-                  f"{axePower[self.equipped][0]}-{axePower[self.equipped][1]}")
+                  f"{itemStrength[self.equipped][0]}-" + 
+                  f"{itemStrength[self.equipped][1]}")
             equipChoice = input("What do you equip: ")
             if equipChoice == 'wood':
                 print("\nYou cannot equip wood")
@@ -61,8 +62,8 @@ class Player():
                       f"\033[38;2;{rVal};{gVal};{bVal}m{equipChoice}\033[0m")
                 self.equipped = equipChoice
                 print("it has a stength of " + 
-                      f"{axePower[self.equipped][0]}-" + 
-                      f"{axePower[self.equipped][1]}")
+                      f"{itemStrength[self.equipped][0]}-" + 
+                      f"{itemStrength[self.equipped][1]}")
                 break
             elif equipChoice == "back":
                 break

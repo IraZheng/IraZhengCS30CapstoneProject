@@ -21,7 +21,7 @@ colours = {"wood": [120, 80, 7],"common": [207, 207, 207],
            "mythic": [240, 67, 10],"exclusiveB": [46, 53, 71], 
            "exclusiveA": [46, 53, 71]}
 #strength for chopping wood
-axePower = {"none": [1, 5],"common": [2, 6], "uncommon": [4, 8], 
+itemStrength = {"none": [1, 5],"common": [2, 6], "uncommon": [4, 8], 
             "rare": [10, 14], "epic": [14, 19], "legend": [18, 30], 
             "mythic": [25, 50],"exclusiveB": [50, 100], 
             "exclusiveA": [100, 200]}
@@ -65,7 +65,7 @@ def shopMenu():
         print("-inventory\n-buy\n-exit")
         shopChoice = input("What do you want to do: ").lower()
         if shopChoice == "inventory":
-            Player1.printInv(axePower)
+            Player1.printInv(itemStrength)
         elif shopChoice == "buy":
             while True:
                 print(f"\nYou have {Player1.coins} coins")
@@ -112,7 +112,7 @@ def guildMenu():
               "-view accepted quests\n-turn in quests\n-exit")
         guildChoice = input("What do you do: ").lower()
         if guildChoice == "inventory":
-            Player1.printInv(axePower)
+            Player1.printInv(itemStrength)
         elif guildChoice == "accept quests":
             while True:
                 print("\nHere are all the available quests")
@@ -207,10 +207,10 @@ def forestMenu():
         print("-inventory\n-chop wood\n-exit")
         forestChoice = input("What do you do: ").lower()
         if forestChoice == "inventory":
-            Player1.printInv(axePower)
+            Player1.printInv(itemStrength)
         elif forestChoice == "chop wood":
-            woodAmount = random.randint(axePower[Player1.equipped][0], 
-                                        axePower[Player1.equipped][1])
+            woodAmount = random.randint(itemStrength[Player1.equipped][0], 
+                                        itemStrength[Player1.equipped][1])
             Player1.inventory["wood"]+=woodAmount
             print(f"\nYou have gained {woodAmount} wood")
             for quest in Player1.acceptedQuests:
@@ -254,7 +254,7 @@ def mainMenu():
         print("-inventory\n-move\n-quit")
         mainMenuChoice = input("What do you want to do: ").lower()
         if mainMenuChoice == "inventory":
-            Player1.printInv(axePower)
+            Player1.printInv(itemStrength)
         elif mainMenuChoice == "move":
             movementMenu()
         elif mainMenuChoice == "quit":

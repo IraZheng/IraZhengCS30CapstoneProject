@@ -80,4 +80,4 @@
 - Added equippable items
     - Items now have strength and effect how much wood you chop
 - Added WoodIV quest
-- printInv() now takes axePower variable
+- printInv() now takes itemStrength variable
