@@ -17,21 +17,57 @@ class Player():
         self.textColours = textColours
         self.acceptedQuests = acceptedQuests
         self.luck = luck
+        self.equipped = "none"
 
     
-    def printInv(self):
-        '''prints the player inventory'''
-        print("\nIn your inventory you have:")
-        print(f"{self.coins} coins")
-        print(f"{'amount':<10}{'item':<10}")
-        for item in self.inventory:
-            if self.inventory[item] > 0:
-                rVal = self.textColours[item][0]
-                gVal = self.textColours[item][1]
-                bVal = self.textColours[item][2]
-                print(f"{self.inventory[item]:<10}" + 
-                      f"\033[38;2;{rVal};{gVal};{bVal}m{item:<10}\033[0m" +
-                      f"{'items':<5}")
+    def printInv(self, axePower):
+        '''
+        prints the player inventory
+        axePower: the strength of the item
+        '''
+        while True:
+            print("\nIn your inventory you have:")
+            print(f"{self.coins} coins")
+            print(f"{'amount':<10}{'item':<10}")
+            for item in self.inventory:
+                if self.inventory[item] > 0:
+                    rVal = self.textColours[item][0]
+                    gVal = self.textColours[item][1]
+                    bVal = self.textColours[item][2]
+                    print(f"{self.inventory[item]:<10}" + 
+                          f"\033[38;2;{rVal};{gVal};{bVal}m{item:<10}\033[0m" +
+                          f"{'items':<5}")
+            print("-back")
+            if self.equipped != "none":
+                rVal = self.textColours[self.equipped][0]
+                gVal = self.textColours[self.equipped][1]
+                bVal = self.textColours[self.equipped][2]
+                print("You currently have " + 
+                      f"\033[38;2;{rVal};{gVal};{bVal}m{self.equipped}" + 
+                      "\033[0m equipped")
+            else:
+                print(f"You currently have {self.equipped} equipped")
+            print("it has a stength of " + 
+                  f"{axePower[self.equipped][0]}-{axePower[self.equipped][1]}")
+            equipChoice = input("What do you equip: ")
+            if equipChoice == 'wood':
+                print("\nYou cannot equip wood")
+            elif ((equipChoice in self.inventory) and 
+                  (self.inventory[equipChoice] > 0)):
+                rVal = self.textColours[equipChoice][0]
+                gVal = self.textColours[equipChoice][1]
+                bVal = self.textColours[equipChoice][2]
+                print("\nYou have equipped " + 
+                      f"\033[38;2;{rVal};{gVal};{bVal}m{equipChoice}\033[0m")
+                self.equipped = equipChoice
+                print("it has a stength of " + 
+                      f"{axePower[self.equipped][0]}-" + 
+                      f"{axePower[self.equipped][1]}")
+                break
+            elif equipChoice == "back":
+                break
+            else:
+                print("Please choose one of the options listed above")
 
     def viewQuests(self, questDict):
         '''

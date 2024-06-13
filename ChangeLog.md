@@ -72,3 +72,10 @@
 
 6/12/2024
 - prints something when you turn in quests but none are valid
+
+# Version 3
+6/13/2024
+- Added equippable items
+    - Items now have strength and effect how much wood you chop
+- Added WoodIV quest
+- printInv() now takes axePower variable
