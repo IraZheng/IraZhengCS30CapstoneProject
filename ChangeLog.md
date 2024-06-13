@@ -1,3 +1,4 @@
+# Version 1
 5/29/2024
 - created change log
 - created basic dev work
@@ -32,6 +33,7 @@
     - buying lootboxes now costs coins
     - improved shop menu
 
+# Version 2
 6/4/2024
 - Lootbox cost now works
 - Started work on quests
