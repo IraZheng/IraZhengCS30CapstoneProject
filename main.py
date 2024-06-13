@@ -218,7 +218,13 @@ def forestMenu():
             woodAmount = random.randint(itemStrength[Player1.equipped][0], 
                                         itemStrength[Player1.equipped][1])
             Player1.inventory["wood"]+=woodAmount
-            print(f"\nYou have gained {woodAmount} wood")
+            rVal = colours["wood"][0]
+            gVal = colours["wood"][1]
+            bVal = colours["wood"][2]
+            print(f"\nYou have gained {woodAmount} " + 
+                 f"\033[38;2;{rVal};{gVal};{bVal}mwood\033[0m")
+            print(f"You have {Player1.inventory['wood']} " + 
+                  f"\033[38;2;{rVal};{gVal};{bVal}mwood\033[0m")
             for quest in Player1.acceptedQuests:
                 if (quest.type == "wood" and 
                     Player1.inventory["wood"] >= quest.requirement):
