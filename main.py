@@ -60,6 +60,7 @@ questDict = {WoodI: True, WoodII: True, WoodIII: True, WoodIV: True}
 # Functions -------------------------------------------------------------------
 def shopMenu():
     '''Menu of the shop where you buy lootboxes'''
+    #main shop loop
     while True:
         print("\nWelcome to the shop")
         print("-inventory\n-buy\n-exit")
@@ -67,6 +68,7 @@ def shopMenu():
         if shopChoice == "inventory":
             Player1.printInv(itemStrength)
         elif shopChoice == "buy":
+            #shop loop for purchasing items
             while True:
                 print(f"\nYou have {Player1.coins} coins")
                 print(f"{'Cost': <10}{'Item': <20}")
@@ -81,6 +83,7 @@ def shopMenu():
                 for box in shopBoxes:
                     if buyChoice == box.name.lower():
                         invalidChoice = False
+                        #how many things do you buy
                         while True:
                             try:
                                 lootboxAmount = int(
@@ -106,6 +109,7 @@ def shopMenu():
 
 def guildMenu():
     '''the place where you do accept quests and gain coins'''
+    #main guild loop
     while True:
         print("\nWelcome to the adventurer's guild")
         print("-inventory\n-accept quests\n" + 
@@ -114,6 +118,7 @@ def guildMenu():
         if guildChoice == "inventory":
             Player1.printInv(itemStrength)
         elif guildChoice == "accept quests":
+            #quest accepting loop
             while True:
                 print("\nHere are all the available quests")
                 for quest in questDict:
@@ -134,6 +139,7 @@ def guildMenu():
                         ques.completionStatus = False
                     if (questAcceptionChoice == ques.name.lower() and 
                         questDict[ques]):
+                        #confirmation that you accept and printing descriptions
                         while True:
                             print("")
                             ques.printDescription()
@@ -170,6 +176,7 @@ def guildMenu():
                 else:
                     break
         elif guildChoice == "view accepted quests":
+            #takes questDict so you can abandon quests
             Player1.viewQuests(questDict)
         elif guildChoice == "turn in quests":
             for quest in Player1.acceptedQuests:
