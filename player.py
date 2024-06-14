@@ -26,6 +26,7 @@ class Player():
         itemStrength: the strength of the item
         '''
         while True:
+            #printing items
             print("\nIn your inventory you have:")
             print(f"{self.coins} coins")
             print(f"{'amount':<10}{'item':<10}")
@@ -38,6 +39,7 @@ class Player():
                           f"\033[38;2;{rVal};{gVal};{bVal}m{item:<10}\033[0m" +
                           f"{'items':<5}")
             print("-back")
+            #printing strength of items
             if self.equipped != "none":
                 rVal = self.textColours[self.equipped][0]
                 gVal = self.textColours[self.equipped][1]
@@ -50,6 +52,7 @@ class Player():
             print("it has a stength of " + 
                   f"{itemStrength[self.equipped][0]}-" + 
                   f"{itemStrength[self.equipped][1]}")
+            #equipping items
             equipChoice = input("What do you equip: ")
             if equipChoice == 'wood':
                 print("\nYou cannot equip wood")
@@ -76,11 +79,13 @@ class Player():
         questDict: the dictionary that the quest function uses
         '''
         while True:
+            #printing quests
             print("\nHere are all of your accepted quests:")
             for quest in self.acceptedQuests:
                 print("")
                 quest.printDescription()
             print("-back")
+            #which quest to view
             viewChoice = input("Which quest do you view: ").lower()
             invalidChoice = True
             if viewChoice == "back":
@@ -89,6 +94,7 @@ class Player():
             for quest in self.acceptedQuests:
                 if viewChoice == quest.name.lower():
                     invalidChoice = False
+                    #abandoning quests
                     while True:
                         print("")
                         quest.printDescription()
@@ -103,6 +109,7 @@ class Player():
                         else:
                             print("Please choose one of the above options")
                     break
+            #only prints when user has made an invalid choice
             if invalidChoice:
                 print("Please choose one of the " + 
                        "quests listed above or 'back'")

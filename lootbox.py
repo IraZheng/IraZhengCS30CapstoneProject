@@ -53,6 +53,7 @@ class Lootbox():
                 if randomEntry <= total2:
                     self.Counter(item)
                     break
+        #printing obtained items
         print("\nYou have obtained:")
         print(f"{'amount':<10}{'item':<10}{'chance':<10}")
         for item in self.counter:

@@ -1,9 +1,9 @@
 ###############################################################################
 #Title: Lootbox Simulator
 #Class: CS 30
-#Assignment:Capstone Coding Project
+#Assignment: Capstone Coding Project
 #Coder: Ira Zheng
-#Version: 2.0
+#Version: 3.0
 ###############################################################################
 '''Lootbox Simulator'''
 ###############################################################################
@@ -208,16 +208,19 @@ def guildMenu():
 
 def forestMenu():
     '''This is where you gain wood'''
+    #forest loop
     while True:
         print("\nWelcome to the forest")
         print("-inventory\n-chop wood\n-exit")
         forestChoice = input("What do you do: ").lower()
         if forestChoice == "inventory":
             Player1.printInv(itemStrength)
+        #chops wood
         elif forestChoice == "chop wood":
             woodAmount = random.randint(itemStrength[Player1.equipped][0], 
                                         itemStrength[Player1.equipped][1])
             Player1.inventory["wood"]+=woodAmount
+            #prints what you got
             rVal = colours["wood"][0]
             gVal = colours["wood"][1]
             bVal = colours["wood"][2]
@@ -225,6 +228,7 @@ def forestMenu():
                  f"\033[38;2;{rVal};{gVal};{bVal}mwood\033[0m")
             print(f"You have {Player1.inventory['wood']} " + 
                   f"\033[38;2;{rVal};{gVal};{bVal}mwood\033[0m")
+            #prints a message if your quest is completed
             for quest in Player1.acceptedQuests:
                 if (quest.type == "wood" and 
                     Player1.inventory["wood"] >= quest.requirement):
@@ -240,6 +244,7 @@ def forestMenu():
 
 def movementMenu():
     '''This menu moves the player to a different location'''
+    #movement loop
     while True:
         print("\nWhere do you want to go?")
         print("-shop\n-guild\n-forest\n-back")
@@ -261,6 +266,7 @@ def movementMenu():
 
 def mainMenu():
     '''the main menu of the game'''
+    #main menu loop
     while True:
         print("\nWhat do you want to do?")
         print("-inventory\n-move\n-quit")

@@ -81,3 +81,6 @@
     - Items now have strength and effect how much wood you chop
 - Added WoodIV quest
 - printInv() now takes itemStrength variable
+
+6/14/2024
+- Added comments
