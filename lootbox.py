@@ -26,7 +26,7 @@ class Lootbox():
         self.counter = counter
 
     
-    def Roll(self, amountOfRolls, luck):
+    def roll(self, amountOfRolls, luck):
         '''
         generates random items based on chances
         amountOfRolls: the number of times it will roll
@@ -51,7 +51,7 @@ class Lootbox():
                 total2 += adjustedTotals[counter]
                 #returns lowest rarity
                 if randomEntry <= total2:
-                    self.Counter(item)
+                    self.itemCounter(item)
                     break
         #printing obtained items
         print("\nYou have obtained:")
@@ -69,7 +69,7 @@ class Lootbox():
             self.counter[item] = 0
             
 
-    def Counter(self, item):
+    def itemCounter(self, item):
         '''
         stores the number of items in each rarity
         item: the item you are storing

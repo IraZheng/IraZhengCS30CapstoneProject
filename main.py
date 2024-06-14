@@ -91,7 +91,7 @@ def shopMenu():
                                 print("please input a number")
                             else:
                                 if Player1.coins - lootboxAmount*box.cost >= 0:
-                                    box.Roll(lootboxAmount, Player1.luck)
+                                    box.roll(lootboxAmount, Player1.luck)
                                     Player1.coins -= lootboxAmount*box.cost
                                 else:
                                     print("\nYou do not have enough coins")

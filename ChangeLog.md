@@ -84,3 +84,4 @@
 6/14/2024
 - Added comments
 - Added instructions
+- updated lootbox methods to be in lowerCamelCase
