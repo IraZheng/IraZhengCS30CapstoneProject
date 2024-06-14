@@ -69,8 +69,7 @@
 - Added a new lootbox
 
 6/11/2024
-- bug fixes
-- I dont think I have time to make items from lootbox actually do something
+- minor bug fixes
 
 6/12/2024
 - prints something when you turn in quests but none are valid
@@ -84,3 +83,4 @@
 
 6/14/2024
 - Added comments
+- Added instructions
