@@ -1,0 +1,5 @@
+- Press run and (hopefully) everything will be explained clearly in game
+- Type ctrl + C at any time to quit
+- The shop is where you buy lootboxes (equip items in the inventory)
+- The guild is where you get quests for gold to spend at the shop
+- The forest is where you get quest materials

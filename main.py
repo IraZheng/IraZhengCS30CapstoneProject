@@ -87,7 +87,7 @@ def shopMenu():
                             try:
                                 lootboxAmount = int(
                                     input("How many do you buy: "))
-                            except:
+                            except ValueError:
                                 print("please input a number")
                             else:
                                 if Player1.coins - lootboxAmount*box.cost >= 0:
